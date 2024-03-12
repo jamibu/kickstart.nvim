@@ -32,6 +32,10 @@ local Plugin = {
       return title
     end,
 
+    wiki_link_func = function(opts)
+      return require('obsidian.util').wiki_link_alias_only(opts)
+    end,
+
     disable_frontmatter = true,
     ui = {
       checkboxes = {
@@ -81,7 +85,8 @@ function Plugin.config(_, opts)
     local note = obsidian:create_note { title = foldername, no_write = true }
 
     local existing_note = note:exists()
-    obsidian:open_note(note)
+    -- obsidian:open_note(note)
+    vim.cmd('e ' .. tostring(note.path))
 
     if not existing_note then
       vim.cmd 'ObsidianTemplate Project.md'
@@ -89,7 +94,7 @@ function Plugin.config(_, opts)
       -- This means that there is a empty line at the top of a new file.
       vim.cmd 'norm dd'
     end
-  end, { desc = 'Obsidian workplaces' })
+  end, { desc = 'Create or go to [n]ote for current [p]roject.' })
 end
 
 return Plugin
