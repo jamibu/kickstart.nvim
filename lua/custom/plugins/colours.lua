@@ -1,11 +1,12 @@
-local repo = 'folke/tokyonight.nvim'
-local colorscheme = 'tokyonight-moon'
+-- local repo = 'folke/tokyonight.nvim'
+-- local colorscheme = 'tokyonight-moon'
 
--- local repo = 'catppuccin/nvim'
--- local colorscheme = 'catppuccin-mocha'
+local repo = 'catppuccin/nvim'
+local colorscheme = 'catppuccin-mocha'
 
 -- local repo = 'rose-pine/neovim'
 -- local colorscheme = 'rose-pine-moon'
+-- local colorscheme = 'rose-pine'
 
 Plugin = {
   -- You can easily change to a different colorscheme.
