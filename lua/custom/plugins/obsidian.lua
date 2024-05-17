@@ -28,15 +28,20 @@ local Plugin = {
       subdir = 'templates',
     },
 
+    disable_frontmatter = true,
+
     note_id_func = function(title)
       return title
     end,
 
-    wiki_link_func = function(opts)
-      return require('obsidian.util').wiki_link_alias_only(opts)
-    end,
+    callbacks = {
+      enter_note = function(client, note)
+        vim.opt_local.tabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.expandtab = false
+      end,
+    },
 
-    disable_frontmatter = true,
     ui = {
       checkboxes = {
         -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
@@ -45,19 +50,6 @@ local Plugin = {
         ['>'] = { char = '', hl_group = 'ObsidianRightArrow' },
         ['~'] = { char = '󰰱', hl_group = 'ObsidianTilde' },
         ['/'] = { char = '󱎖', hl_group = 'ObsidianInProgress' },
-      },
-      hl_groups = {
-        -- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
-        ObsidianTodo = { bold = true, fg = '#f78c6c' },
-        ObsidianInProgress = { bold = true, fg = '#f78c6c' },
-        ObsidianDone = { bold = true, fg = '#89ddff' },
-        ObsidianRightArrow = { bold = true, fg = '#f78c6c' },
-        ObsidianTilde = { bold = true, fg = '#ff5370' },
-        ObsidianBullet = { bold = true, fg = '#89ddff' },
-        ObsidianRefText = { underline = true, fg = '#c792ea' },
-        ObsidianExtLinkIcon = { fg = '#c792ea' },
-        ObsidianTag = { italic = true, fg = '#89ddff' },
-        ObsidianHighlightText = { bg = '#75662e' },
       },
     },
   },
