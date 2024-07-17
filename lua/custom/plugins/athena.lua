@@ -1,7 +1,7 @@
 return {
-  dir = '~/personal/athena.nvim',
-  name = 'athena',
-  config = function()
-    require 'athena'
-  end,
+  -- dir = '~/personal/athena.nvim',
+  -- name = 'athena',
+  -- config = function()
+  --   require 'athena'
+  -- end,
 }
