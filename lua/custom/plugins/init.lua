@@ -5,15 +5,6 @@
 return {
   { 'mbbill/undotree', event = 'VeryLazy' },
   {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
-    },
-    config = true,
-  },
-  {
     'kiyoon/jupynium.nvim',
     build = 'pip3 install --user .',
     -- build = "conda run --no-capture-output -n jupynium pip install .",
