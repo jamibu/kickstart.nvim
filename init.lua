@@ -94,7 +94,6 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
-require 'custom.core'
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
@@ -235,6 +234,8 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- NOTE: My own options are imported here. Import at the end so they aren't over written
+require 'custom.core'
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
