@@ -17,23 +17,34 @@ return {
 
     -- see below for full list of optional dependencies 👇
   },
+
+  -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
+  completion = {
+    -- Enables completion using blink.cmp
+    blink = true,
+    -- Trigger completion at 2 chars.
+    min_chars = 2,
+    -- Set to false to disable new note creation in the picker
+    create_new = true,
+  },
+
   opts = {
     workspaces = {
       {
-        name = 'personal',
-        path = '~/notes/Personal',
+        name = 'notes',
+        path = '~/notes/Notes',
       },
       {
         name = 'work',
-        path = '~/notes/Work',
+        path = '~/notes/Notes',
       },
     },
     templates = {
-      subdir = 'templates',
+      subdir = 'Meta/Templates',
     },
 
     new_notes_location = 'notes_subdir',
-    notes_subdir = 'pages',
+    notes_subdir = '000-Inbox',
 
     ui = {
       checkboxes = {
