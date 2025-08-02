@@ -1,5 +1,5 @@
-return {
-  'epwalsh/obsidian.nvim',
+local Plugin = {
+  'obsidian-nvim/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = 'markdown',
@@ -14,8 +14,6 @@ return {
   dependencies = {
     -- Required.
     'nvim-lua/plenary.nvim',
-
-    -- see below for full list of optional dependencies 👇
   },
 
   -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
@@ -24,39 +22,43 @@ return {
     blink = true,
     -- Trigger completion at 2 chars.
     min_chars = 2,
-    -- Set to false to disable new note creation in the picker
-    create_new = true,
   },
 
   opts = {
+    legacy_commands = false,
     workspaces = {
       {
         name = 'notes',
         path = '~/notes/Notes',
       },
-      {
-        name = 'work',
-        path = '~/notes/Notes',
-      },
     },
     templates = {
-      subdir = 'Meta/Templates',
+      subdir = 'meta/templates',
+      date_format = '%Y-%m-%d %H:%M:%S',
+      substitutions = {
+        time = function()
+          return os.time(os.date '!*t')
+        end,
+      },
     },
 
     new_notes_location = 'notes_subdir',
     notes_subdir = '000-Inbox',
-
-    ui = {
-      checkboxes = {
-        -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
-        [' '] = { char = '󰄱', hl_group = 'ObsidianTodo' },
-        ['x'] = { char = '', hl_group = 'ObsidianDone' },
-        ['>'] = { char = '', hl_group = 'ObsidianRightArrow' },
-        ['~'] = { char = '󰰱', hl_group = 'ObsidianTilde' },
-        ['/'] = { char = '󱎖', hl_group = 'ObsidianInProgress' },
-      },
-    },
-
-    -- see below for full list of options 👇
   },
 }
+
+function Plugin.config(_, opts)
+  require('obsidian').setup(opts)
+  vim.keymap.set('n', '<leader>no', '<cmd>Obsidian open<cr>', { desc = 'Open Obsidian App on current note' })
+  vim.keymap.set('n', '<leader>nn', '<cmd>Obsidian new<cr>', { desc = 'Open new Obsidian note' })
+  vim.keymap.set('n', '<leader>nt', '<cmd>Obsidian new_from_template<cr>', { desc = 'Open new Obsidian note' })
+  vim.keymap.set('n', '<leader>ni', '<cmd>Obsidian template<cr>', { desc = 'Insert Obsidian template' })
+  vim.keymap.set('n', '<leader>nf', '<cmd>Obsidian quick_switch<cr>', { desc = 'Open Obsidian quick switch' })
+  vim.keymap.set('n', '<leader>n#', '<cmd>Obsidian tag<cr>', { desc = 'Obsidian tags in Telescope' })
+  vim.keymap.set('n', '<leader>ng', '<cmd>Obsidian search<cr>', { desc = 'Grep through notes' })
+  vim.keymap.set('n', '<leader>nb', '<cmd>Obsidian backlink<cr>', { desc = 'Obsidian backlinks in Telescope' })
+  vim.keymap.set('n', '<leader>nw', '<cmd>Obsidian workspace<cr>', { desc = 'Obsidian workplaces' })
+  vim.keymap.set('n', '<leader>nc', '<cmd>Obsidian check<cr>', { desc = 'Check that notes are in good state' })
+end
+
+return Plugin
