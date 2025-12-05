@@ -1,8 +1,7 @@
 vim.opt_local.conceallevel = 2
 
 -- Wrapping for readability
-vim.opt_local.wrapmargin = 90
-vim.opt_local.textwidth = 90
+vim.opt.wrap = true
 vim.opt_local.linebreak = true
 
 -- Tabs
